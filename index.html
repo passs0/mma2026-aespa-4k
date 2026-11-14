@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[#MMA2026] aespa - WDA + Switchblade + LEMONADE</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --card: #141821;
+      --text: #e8ecf4;
+      --muted: #9aa4b2;
+      --accent: #7c9cff;
+      --border: #232a38;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    main {
+      width: 100%;
+      max-width: 1080px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+    .player-wrap {
+      background: #000;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #000;
+    }
+    .meta {
+      padding: 18px 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .sub {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    a.btn {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text);
+      background: #1d2433;
+      border: 1px solid var(--border);
+    }
+    a.btn:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="player-wrap">
+      <video id="video" controls playsinline preload="metadata"></video>
+    </div>
+    <div class="meta">
+      <div>
+        <h1>[#MMA2026] aespa - WDA + Switchblade + LEMONADE</h1>
+        <p class="sub">1080p HLS stream &middot; Source: <a href="https://www.youtube.com/watch?v=cnSMlOc9L5k" style="color: var(--accent);">YouTube</a></p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="https://github.com/passs0/mma2026-aespa-4k/releases/tag/v1.0">Download 4K MP4 (Release)</a>
+        <a class="btn" href="https://github.com/passs0/mma2026-aespa-4k">GitHub Repo</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const video = document.getElementById('video');
+    const src = 'stream/index.m3u8';
+
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = src;
+    } else if (window.Hls && Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(src);
+      hls.attachMedia(video);
+    } else {
+      video.outerHTML = '<p style="padding:24px;text-align:center;">HLS playback is not supported in this browser. Please download the 4K MP4 from Releases.</p>';
+    }
+  </script>
+</body>
+</html>
